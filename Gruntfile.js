@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = function(grunt) {
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  // grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jsxhint');
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -26,15 +27,15 @@ module.exports = function(grunt) {
         src: ['Gruntfile.js', 'server.js', 'models/*.js', 'routes/*.js']
       },
       client: {
-        src: ['app/**/*.js'],
+        src: ['app/**/*.jsx'],
         options: {
           globals: {
-            angular: true
+            document: true,
           }
         }
       },
       options: {
-        node: true
+        node: true,
       }
     },
 
@@ -98,4 +99,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build:dev', ['webpack:client', 'copy:html']);
   grunt.registerTask('build', ['build:dev']);
   grunt.registerTask('jshint:all', ['jshint:mocha', 'jshint:server', 'jshint:client']);
+
 };
